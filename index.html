@@ -63,6 +63,7 @@
             width: 1200px;
             margin: 20px auto 20px auto;
         }
+
         .mypost {
             width: 500px;
             margin: 20px auto 20px auto;
@@ -70,6 +71,7 @@
 
             box-shadow: 0px 0px 3px 0px gray;
         }
+
         .mybtn {
 
             display: flex;
@@ -79,20 +81,32 @@
 
             margin-top: 20px;
         }
-        .mybtn > button {
+
+        .mybtn>button {
             margin-right: 10px;
         }
-
     </style>
+    <script>
+        // 페이지가 로드되면 자동으로 실행
+        $(document).ready(function () {
+            fetch("http://spartacodingclub.shop/sparta_api/weather/seoul").then(res => res.json()).then(data => {
+                // console.log(data)
+                // let temp = data['temp']
+                // $('#temp').text(temp)
+                $('#temp').text(data['temp'])
+            })
+        })
+    </script>
 </head>
 
 <body>
     <div class="mytitle">
         <h1>내 생애 최고의 영화들</h1>
-        <button>영화 기록하기</button>
+        <div>현재 서울의 날씨 : <span id="temp">-</span>도</div>
+        <button onclick="hey()">영화 기록하기</button>
     </div>
     <div class="mypost">
-        <div class="form-floating mb-3"> 
+        <div class="form-floating mb-3">
             <!-- 입력 타입이 이메일로 설정되어 있기 때문에 브라우저 자동 완성 기능이 이메일을 입력하는 것인가? -->
             <input type="url" class="form-control" id="floatingInput" placeholder="name@example.com">
             <label for="floatingInput">영화 URL</label>
@@ -101,14 +115,14 @@
             <label class="input-group-text" for="inputGroupSelect01">별점</label>
             <select class="form-select" id="inputGroupSelect01">
                 <!-- 만점부터 역순으로 선택 -->
-              <option selected> ---선택하기--- </option>
-              <option value="5">⭐⭐⭐⭐⭐</option>
-              <option value="4">⭐⭐⭐⭐</option>
-              <option value="3">⭐⭐⭐</option>
-              <option value="2">⭐⭐</option>
-              <option value="1">⭐</option>
+                <option selected> ---선택하기--- </option>
+                <option value="5">⭐⭐⭐⭐⭐</option>
+                <option value="4">⭐⭐⭐⭐</option>
+                <option value="3">⭐⭐⭐</option>
+                <option value="2">⭐⭐</option>
+                <option value="1">⭐</option>
             </select>
-          </div>
+        </div>
         <div class="form-floating">
             <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
             <label for="floatingTextarea">코멘트</label>
